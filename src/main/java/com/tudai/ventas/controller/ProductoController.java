@@ -26,6 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tudai.ventas.models.Producto;
 import com.tudai.ventas.services.ProductoService;
 
+/**
+ * Controlador Rest para la entidad de Producto
+ * @see Producto
+ */
 @RestController
 @RequestMapping("producto")
 @Api(description = "Api Rest de Producto", tags = "Producto")
@@ -36,6 +40,10 @@ public class ProductoController {
 	private static Logger log = LoggerFactory.getLogger(ProductoController.class);
 
 
+	/**
+	 * Obtener todos los productos
+	 * @return lista de productos
+	 */
 	@ApiOperation(value = "Obtener todos los productos", response = Iterable.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -48,6 +56,10 @@ public class ProductoController {
 	public Iterable<Producto> getProductos(){return service.getProductos();}
 
 
+	/**
+	 * Obtener el producto mas vendido
+	 * @return lista del producto mas vendido
+	 */
 	@ApiOperation(value = "Obtener el producto más vendido", response = Iterable.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -60,6 +72,11 @@ public class ProductoController {
 	public Iterable<Producto> getProductoMasVendido(){return service.getProdMasVend();}
 
 
+	/**
+	 * Obtener un producto dado su nro de serial
+	 * @param serial nro de serial del producto
+	 * @return entidad de respuesta con el producto y/o codigo de estado http
+	 */
 	@ApiOperation(value = "Obtener un producto dado su serial", response = ResponseEntity.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -79,6 +96,11 @@ public class ProductoController {
 	}
 
 
+	/**
+	 * Agregar un nuevo producto
+	 * @param p producto
+	 * @return entidad de respuesta con el cliente y/o codigo de estado http
+	 */
 	@ApiOperation(value = "Agregar un nuevo producto", response = ResponseEntity.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -99,6 +121,12 @@ public class ProductoController {
 	}
 
 
+	/**
+	 * Modificar un producto dado su nro de serial
+	 * @param newp nuevo objeto producto
+	 * @param serial id del producto a reemplazar por el nuevo
+	 * @return nuevo producto
+	 */
 	@ApiOperation(value = "Modificar un producto dado su serial", response = Producto.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -119,6 +147,10 @@ public class ProductoController {
 	}
 
 
+	/**
+	 * Eliminar un producto dado su nro de serial
+	 * @param serial nro de serial del producto
+	 */
 	@ApiOperation(value = "Eliminar un producto dado su serial")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),

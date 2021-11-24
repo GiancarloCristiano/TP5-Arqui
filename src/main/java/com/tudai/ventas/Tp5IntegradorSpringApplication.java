@@ -18,6 +18,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+/**
+ * Main del proyecto
+ */
 @SpringBootApplication
 public class Tp5IntegradorSpringApplication {
 
@@ -27,7 +30,10 @@ public class Tp5IntegradorSpringApplication {
 
 
 	}
-	
+
+	/**
+	 * Configuracion de CORS
+	 */
 	@Configuration
 	public class CorsConfig {
 	    @Bean
@@ -45,6 +51,9 @@ public class Tp5IntegradorSpringApplication {
 	    }
 	}
 
+	/**
+	 * Cargador de datos desde un csv para las tres endidades
+	 */
 	public static void cargarDatos() {
 //		try {
 //			CSVParser clienteCSV = CSVFormat.DEFAULT.withHeader().parse(new FileReader("csv/cliente.csv"));

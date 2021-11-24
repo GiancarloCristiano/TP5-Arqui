@@ -2,7 +2,10 @@ package com.tudai.ventas.DTO;
 
 import java.sql.Date;
 
-
+/**
+ * DTO de ventas
+ * @see com.tudai.ventas.models.Ventas
+ */
 public class VentasJson {
 	private Date fecha_venta;
 

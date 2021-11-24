@@ -1,5 +1,9 @@
 package com.tudai.ventas.DTO;
 
+/**
+ * DTO de compras por cliente
+ * @see com.tudai.ventas.models.Cliente
+ */
 public class ComprasPorClienteDTO {
 	private Long documento;
 	private String nombre;

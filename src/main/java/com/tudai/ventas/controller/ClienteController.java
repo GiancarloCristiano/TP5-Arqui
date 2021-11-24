@@ -25,6 +25,10 @@ import com.tudai.ventas.DTO.ComprasPorClienteDTO;
 import com.tudai.ventas.models.Cliente;
 import com.tudai.ventas.services.ClienteService;
 
+/**
+ * Controlador Rest para la entidad de Cliente
+ * @see Cliente
+ */
 @RestController
 @RequestMapping("cliente")
 @Api(description = "Api Rest de Cliente", tags = "Cliente")
@@ -34,7 +38,10 @@ public class ClienteController {
 	private ClienteService service;
 	private static Logger log = LoggerFactory.getLogger(ClienteService.class);
 
-
+	/**
+	 * Obtener todos los clientes
+	 * @return lista de clientes
+	 */
 	@ApiOperation(value = "Obtener todos los clientes", response = Iterable.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -47,6 +54,10 @@ public class ClienteController {
 	public Iterable<Cliente> getClientes(){return service.getClientes();}
 
 
+	/**
+	 * Obtener todos los clientes y el monto total de sus compras
+	 * @return lista de clientes con su monto de compras
+	 */
 	@ApiOperation(value = "Obtener todos los clientes y el monto total de sus compras", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -60,6 +71,12 @@ public class ClienteController {
 		return service.totalComprasClientes();
 	}
 
+
+	/**
+	 * Obtener un cliente dado su nro de documento
+	 * @param documento nro de documento del cliente
+	 * @return entidad de respuesta con el cliente y/o codigo de estado http
+	 */
 	@ApiOperation(value = "Obtener un cliente dado su nro de documento", response = ResponseEntity.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -78,6 +95,12 @@ public class ClienteController {
 		}
 	}
 
+
+	/**
+	 * Agregar un nuevo cliente
+	 * @param c cliente
+	 * @return entidad de respuesta con el cliente y/o codigo de estado http
+	 */
 	@ApiOperation(value = "Agregar un nuevo cliente", response = ResponseEntity.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -97,6 +120,12 @@ public class ClienteController {
 	}
 
 
+	/**
+	 * Modificar un cliente dado su numero de documento
+	 * @param cliente nuevo objeto cliente
+	 * @param documento id del cliente a reemplazar por el nuevo
+	 * @return nuevo cliente
+	 */
 	@ApiOperation(value = "Modificar un cliente dado su nro. de documento", response = Cliente.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -116,6 +145,10 @@ public class ClienteController {
 	}
 
 
+	/**
+	 * Eliminar un cliente dado su nro de documento
+	 * @param documento nro de documento del cliente
+	 */
 	@ApiOperation(value = "Eliminar un cliente dado su nro. de documento")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),

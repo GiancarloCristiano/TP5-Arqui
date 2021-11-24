@@ -1,6 +1,7 @@
 package com.tudai.ventas.models;
 
 public class ComprasPorClienteDTO {
+	/*
 	private Long documento;
 	private String nombre;
 	private String apellido;
@@ -45,5 +46,5 @@ public class ComprasPorClienteDTO {
 		return "ComprasPorClienteDTO [nombre=" + nombre + ", suma=" + suma + "]";
 	}
 	
-	
+	*/
 }

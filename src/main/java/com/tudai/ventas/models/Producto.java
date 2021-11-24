@@ -16,6 +16,10 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+
+/**
+ * Entidad de producto
+ */
 @Entity
 @Table(name="producto")
 public class Producto {

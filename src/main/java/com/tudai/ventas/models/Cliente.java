@@ -16,6 +16,9 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
+/**
+ * Entidad de cliente
+ */
 @Entity
 @Table(name="cliente")
 public class Cliente {

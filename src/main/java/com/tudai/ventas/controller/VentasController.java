@@ -31,6 +31,10 @@ import com.tudai.ventas.services.ClienteService;
 import com.tudai.ventas.services.ProductoService;
 import com.tudai.ventas.services.VentasService;
 
+/**
+ * Controlador Rest para la entidad de Ventas
+ * @see Ventas
+ */
 @RestController
 @RequestMapping("ventas")
 @Api(description = "Api Rest de Ventas", tags = "Ventas")
@@ -46,6 +50,10 @@ public class VentasController {
 	private static Logger log = LoggerFactory.getLogger(ProductoController.class);
 
 
+	/**
+	 * Obtener todas las ventas
+	 * @return lista de ventas
+	 */
 	@ApiOperation(value = "Obtener todas las ventas", response = Iterable.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -58,6 +66,10 @@ public class VentasController {
 	public Iterable<Ventas> getVentas(){return service.getVentas();}
 
 
+	/**
+	 * Obtener todas las ventas por dia
+	 * @return lista de ventas de cada dia
+	 */
 	@ApiOperation(value = "Obtener todas las ventas por día", response = List.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -72,6 +84,11 @@ public class VentasController {
 	}
 
 
+	/**
+	 * Agregar una nueva venta si este cliente tiene menos de 3
+	 * @param v venta
+	 * @return entidad de respuesta con la venta y/o codigo de estado http
+	 */
 	@ApiOperation(value = "Agregar una nueva venta", response = ResponseEntity.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -99,6 +116,13 @@ public class VentasController {
 		}
 	}
 
+
+	/**
+	 * Modificar una venta dado su numero de serial
+	 * @param newv nuevo objeto venta
+	 * @param serial id de la venta a reemplazar por la nueva
+	 * @return nueva venta
+	 */
 	@ApiOperation(value = "Actualizar una venta dado un serial", response = Ventas.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),
@@ -119,6 +143,10 @@ public class VentasController {
 	}
 
 
+	/**
+	 * Eliminar una venta dado su numero de serial
+	 * @param serial numero de serial de la venta
+	 */
 	@ApiOperation(value = "Eliminar una venta dado un serial")
 	@ApiResponses(value = {
 			@ApiResponse(code = 200, message = "OK"),

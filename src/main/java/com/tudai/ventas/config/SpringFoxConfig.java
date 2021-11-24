@@ -8,6 +8,9 @@ import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
+/**
+ * Generador de la documentación con Swagger en base a los controladores REST
+ */
 @Configuration
 public class SpringFoxConfig {
     @Bean

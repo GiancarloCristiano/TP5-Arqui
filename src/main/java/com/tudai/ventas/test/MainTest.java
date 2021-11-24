@@ -19,6 +19,9 @@ import java.util.Date;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
+/**
+ * Main para tests
+ */
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class MainTest {
     @LocalServerPort
@@ -34,17 +37,27 @@ public class MainTest {
     @Autowired
     private TestRestTemplate restTemplate;
 
+    /**
+     * Comparar el string de HomeController
+     */
     @Test
     public void helloTest() {
         assertEquals(homeController.greeting(), "Hello, World");
     }
 
+    /**
+     * Obtener una respuesta de la home y compararlo con un string
+     * @throws Exception
+     */
     @Test
     public void greetingShouldReturnDefaultMessage() throws Exception {
         assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
                 String.class)).contains("Hello, World");
     }
 
+    /**
+     * Prueba de alta de nuevo cliente
+     */
     @Test
     public void altaClienteOK() {
         Cliente cliente = new Cliente(new Long(999999), "Juan", "Rodriguez" );
@@ -52,6 +65,9 @@ public class MainTest {
         assertEquals(cliente.getDocumento(), clienteController.getClienteById(999999).getBody().getDocumento());
     }
 
+    /**
+     * Prueba de alta de nuevo producto
+     */
     @Test
     public void altaProductoOK() {
         Producto puerro = new Producto("puerro", 100, 10);
@@ -61,12 +77,15 @@ public class MainTest {
         assertEquals(puerro.getSerial(), productoController.getProductoById(cuentaSerial).getBody().getSerial());
     }
 
+    /**
+     * Prueba del limitador de ventas por cliente
+     */
     @Test
     public void limiteVenta() {
-        Cliente cliente = new Cliente(new Long(1234567), "Andres", "Diaz Pace" );
+        long documento = 1234567;
+        Cliente cliente = new Cliente(documento, "Andres", "Diaz Pace" );
         clienteController.addCliente(cliente);
         java.sql.Date hoy = new java.sql.Date(Calendar.getInstance().getTime().getTime());
-        long documento = 1234567;
         VentasJson v1 = new VentasJson(hoy, new Long (1), documento);
         VentasJson v2 = new VentasJson(hoy, new Long (2), documento);
         VentasJson v3 = new VentasJson(hoy, new Long (3), documento);
