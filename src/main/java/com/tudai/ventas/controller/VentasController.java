@@ -1,5 +1,6 @@
 package com.tudai.ventas.controller;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -84,6 +85,7 @@ public class VentasController {
 		Optional<Producto> po = serviceProducto.findById(v.getProducto());
 		Optional<Cliente> co = serviceCliente.findById(v.getCliente());
 		Long cantVentas = serviceCliente.cantVentasPorCliente(v.getCliente());
+//		Long cantVentas = serviceCliente.cantVentasPorClientePorDia(v.getCliente(), v.getFecha_venta());
 		boolean ok = false;
 		if ((cantVentas < 3) && !po.isEmpty() && !co.isEmpty()) {
 			Producto p = po.get();
@@ -95,9 +97,7 @@ public class VentasController {
 		} else {
 			return new ResponseEntity<VentasJson>(v,HttpStatus.OK);
 		}
-		
 	}
-
 
 	@ApiOperation(value = "Actualizar una venta dado un serial", response = Ventas.class)
 	@ApiResponses(value = {

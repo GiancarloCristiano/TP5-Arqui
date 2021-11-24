@@ -2,6 +2,7 @@ package com.tudai.ventas.repositories;
 
 
 
+import java.sql.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -26,4 +27,7 @@ public interface ClienteRepository extends JpaRepository<Cliente,Long>{
 
 	@Query("SELECT size(c.ventas) FROM Cliente c WHERE c.documento = :cliente")
 	Long getCantVentas(Long cliente);
+
+	@Query("SELECT size(c.ventas) FROM Cliente c JOIN c.ventas AS v WHERE c.documento = :cliente AND v.fecha_venta = :fecha")
+	Long getCantVentasPorDia(Long cliente, Date fecha);
 }

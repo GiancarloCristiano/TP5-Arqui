@@ -13,6 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -64,10 +65,12 @@ public class MainTest {
     public void limiteVenta() {
         Cliente cliente = new Cliente(new Long(1234567), "Andres", "Diaz Pace" );
         clienteController.addCliente(cliente);
-        VentasJson v1 = new VentasJson(new Date(), new Long (1), new Long (1234567));
-        VentasJson v2 = new VentasJson(new Date(), new Long (2), new Long (1234567));
-        VentasJson v3 = new VentasJson(new Date(), new Long (3), new Long (1234567));
-        VentasJson v4 = new VentasJson(new Date(), new Long (4), new Long (1234567));
+        java.sql.Date hoy = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        long documento = 1234567;
+        VentasJson v1 = new VentasJson(hoy, new Long (1), documento);
+        VentasJson v2 = new VentasJson(hoy, new Long (2), documento);
+        VentasJson v3 = new VentasJson(hoy, new Long (3), documento);
+        VentasJson v4 = new VentasJson(hoy, new Long (4), documento);
         assertEquals(ventasController.addVenta(v1).getStatusCode(), HttpStatus.OK);
         assertEquals(ventasController.addVenta(v2).getStatusCode(), HttpStatus.OK);
         assertEquals(ventasController.addVenta(v3).getStatusCode(), HttpStatus.OK);

@@ -1,6 +1,6 @@
 package com.tudai.ventas.DTO;
 
-import java.util.Date;
+import java.sql.Date;
 
 
 public class VentasJson {

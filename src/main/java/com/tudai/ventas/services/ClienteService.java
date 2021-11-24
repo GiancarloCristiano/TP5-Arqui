@@ -1,5 +1,6 @@
 package com.tudai.ventas.services;
 
+import java.sql.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +53,9 @@ public class ClienteService {
 
     public Long cantVentasPorCliente(Long cliente) {
 		return this.clientes.getCantVentas(cliente);
+	}
+
+	public Long cantVentasPorClientePorDia(Long cliente, Date fecha) {
+		return this.clientes.getCantVentasPorDia(cliente, fecha);
 	}
 }
