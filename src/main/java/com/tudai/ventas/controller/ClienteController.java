@@ -88,7 +88,7 @@ public class ClienteController {
 	@GetMapping("/{documento}")
 	public ResponseEntity<Cliente> getClienteById(@PathVariable long documento){
 		Optional<Cliente> cliente = this.service.findById(documento);
-		if (cliente.isEmpty()) {
+		if (!cliente.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(cliente.get(),HttpStatus.OK);
@@ -137,7 +137,7 @@ public class ClienteController {
 	@PutMapping("/{documento}")
 	Cliente replaceCliente(@RequestBody Cliente cliente,@PathVariable Long documento) {
 		Optional<Cliente> c = service.findById(documento);
-		if (!c.isEmpty()) {
+		if (c.isPresent()) {
 			this.service.deleteCliente(documento);
 			return this.service.addCliente(cliente);
 		}

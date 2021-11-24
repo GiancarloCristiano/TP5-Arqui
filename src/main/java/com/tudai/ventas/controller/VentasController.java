@@ -104,7 +104,7 @@ public class VentasController {
 		Long cantVentas = serviceCliente.cantVentasPorCliente(v.getCliente());
 //		Long cantVentas = serviceCliente.cantVentasPorClientePorDia(v.getCliente(), v.getFecha_venta());
 		boolean ok = false;
-		if ((cantVentas < 3) && !po.isEmpty() && !co.isEmpty()) {
+		if ((cantVentas < 3) && po.isPresent() && co.isPresent()) {
 			Producto p = po.get();
 			Cliente c = co.get();
 			ok = this.service.addVenta(new Ventas(p,c)) != null;
@@ -134,7 +134,7 @@ public class VentasController {
 	@PutMapping("/{serial}")
 	Ventas replaceVenta(@RequestBody Ventas newv,@PathVariable Long serial){
 		Optional<Ventas> v = service.findById(serial);
-		if (!v.isEmpty()) {
+		if (v.isPresent()) {
 			this.service.deleteVenta(serial);
 			return this.service.addVenta(newv);
 		} else {

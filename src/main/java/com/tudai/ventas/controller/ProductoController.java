@@ -88,7 +88,7 @@ public class ProductoController {
 	@GetMapping("/{serial}")
 	public ResponseEntity<Producto> getProductoById(@PathVariable long serial){
 		Optional<Producto> producto = this.service.findById(serial);
-		if (producto.isEmpty()) {
+		if (!producto.isPresent()) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		} else {
 			return new ResponseEntity<>(producto.get(),HttpStatus.OK);
@@ -138,7 +138,7 @@ public class ProductoController {
 	@PutMapping("/{serial}")
 	Producto replaceProducto(@RequestBody Producto newp,@PathVariable Long serial){
 		Optional<Producto> p = service.findById(serial);
-		if (!p.isEmpty()) {
+		if (p.isPresent()) {
 			this.service.deleteProducto(serial);
 			return this.service.saveProducto(newp);
 		} else {

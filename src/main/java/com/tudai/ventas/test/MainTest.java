@@ -16,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import java.util.Calendar;
 import java.util.Date;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
@@ -33,27 +32,8 @@ public class MainTest {
     @Autowired
     VentasController ventasController;
     @Autowired
-    HomeController homeController;
-    @Autowired
     private TestRestTemplate restTemplate;
 
-    /**
-     * Comparar el string de HomeController
-     */
-    @Test
-    public void helloTest() {
-        assertEquals(homeController.greeting(), "Hello, World");
-    }
-
-    /**
-     * Obtener una respuesta de la home y compararlo con un string
-     * @throws Exception
-     */
-    @Test
-    public void greetingShouldReturnDefaultMessage() throws Exception {
-        assertThat(this.restTemplate.getForObject("http://localhost:" + port + "/",
-                String.class)).contains("Hello, World");
-    }
 
     /**
      * Prueba de alta de nuevo cliente

@@ -13,11 +13,6 @@ import com.tudai.ventas.models.Ventas;
  */
 public interface VentasRepository extends JpaRepository<Ventas,Long>{
 
-/*
-	@Query("SELECT p FROM Producto p WHERE p.nombre  = :name")
-	public List<Ventas> findByNombre(String name);
- */
-
 	/**
 	 * Obtener el reporte de ventas diarias
 	 * Se muestra la fecha de venta, la cantidad de productos que se vendieron y de la tabla productos se calcula
