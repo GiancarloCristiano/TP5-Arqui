@@ -25,6 +25,7 @@ public class Tp5IntegradorSpringApplication {
 		SpringApplication.run(Tp5IntegradorSpringApplication.class, args);
 		cargarDatos();
 
+
 	}
 	
 	@Configuration

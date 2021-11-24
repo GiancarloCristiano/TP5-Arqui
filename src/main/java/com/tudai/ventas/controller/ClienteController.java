@@ -60,6 +60,23 @@ public class ClienteController {
 		return service.totalComprasClientes();
 	}
 
+	@ApiOperation(value = "Obtener un cliente dado su nro de documento", response = ResponseEntity.class)
+	@ApiResponses(value = {
+			@ApiResponse(code = 200, message = "OK"),
+			@ApiResponse(code = 401, message = "Acceso no autorizado"),
+			@ApiResponse(code = 403, message = "Acceso prohibido"),
+			@ApiResponse(code = 404, message = "No encontrado"),
+			@ApiResponse(code = 500, message = "Error interno del servidor")
+	})
+	@GetMapping("/{documento}")
+	public ResponseEntity<Cliente> getClienteById(@PathVariable long documento){
+		Optional<Cliente> cliente = this.service.findById(documento);
+		if (cliente.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		} else {
+			return new ResponseEntity<>(cliente.get(),HttpStatus.OK);
+		}
+	}
 
 	@ApiOperation(value = "Agregar un nuevo cliente", response = ResponseEntity.class)
 	@ApiResponses(value = {
@@ -108,7 +125,7 @@ public class ClienteController {
 			@ApiResponse(code = 500, message = "Error interno del servidor")
 	})
 	@DeleteMapping("/{documento}")
-	void deleteProducto(@PathVariable Long documento) {
+	void deleteCliente(@PathVariable Long documento) {
 		this.service.deleteCliente(documento);
 	}
 }
