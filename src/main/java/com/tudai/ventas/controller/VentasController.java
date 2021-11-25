@@ -53,7 +53,7 @@ public class VentasController {
 		Optional<Cliente> co = serviceCliente.findById(v.getCliente());
 		Long cantVentas = serviceCliente.cantVentasPorCliente(v.getCliente());
 		boolean ok = false;
-		if ((cantVentas < 3) && !po.isEmpty() && !co.isEmpty()) {
+		if ((cantVentas < 3) && po.isPresent() && co.isPresent()) {
 			Producto p = po.get();
 			Cliente c = co.get();
 			ok = this.service.addVenta(new Ventas(p,c)) != null;

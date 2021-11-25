@@ -50,7 +50,7 @@ public class ClienteController {
 	@PutMapping("/{documento}")
 	Cliente replaceCliente(@RequestBody Cliente cliente,@PathVariable Long documento) {
 		Optional<Cliente> c = service.findById(documento);
-		if (!c.isEmpty()) {
+		if (c.isPresent()) {
 			this.service.deleteCliente(documento);
 			return this.service.addCliente(cliente);
 		}
