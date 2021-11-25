@@ -99,17 +99,8 @@ public class VentasController {
 	})
 	@PostMapping(value="",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VentasJson> addVenta(@RequestBody VentasJson v){
-		Optional<Producto> po = serviceProducto.findById(v.getProducto());
-		Optional<Cliente> co = serviceCliente.findById(v.getCliente());
-		Long cantVentas = serviceCliente.cantVentasPorCliente(v.getCliente());
-//		Long cantVentas = serviceCliente.cantVentasPorClientePorDia(v.getCliente(), v.getFecha_venta());
-		boolean ok = false;
-		if ((cantVentas < 3) && po.isPresent() && co.isPresent()) {
-			Producto p = po.get();
-			Cliente c = co.get();
-			ok = this.service.addVenta(new Ventas(p,c)) != null;
-		}
-		if (!ok) {
+		
+		if (this.service.addVenta(v) != null) {
 			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		} else {
 			return new ResponseEntity<VentasJson>(v,HttpStatus.OK);
@@ -131,6 +122,7 @@ public class VentasController {
 			@ApiResponse(code = 404, message = "No encontrado"),
 			@ApiResponse(code = 500, message = "Error interno del servidor")
 	})
+	
 	@PutMapping("/{serial}")
 	Ventas replaceVenta(@RequestBody Ventas newv,@PathVariable Long serial){
 		Optional<Ventas> v = service.findById(serial);
