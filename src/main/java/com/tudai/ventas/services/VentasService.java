@@ -11,6 +11,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.tudai.ventas.models.Ventas;
+import com.tudai.ventas.models.Producto;
+import com.tudai.ventas.models.Cliente;
+import com.tudai.ventas.DTO.VentasJson;
+import com.tudai.ventas.repositories.ProductoRepository;
+import com.tudai.ventas.repositories.ClienteRepository;
 import com.tudai.ventas.repositories.VentasRepository;
 
 /**
@@ -22,6 +27,12 @@ public class VentasService {
 
 	@Autowired
 	private VentasRepository ventas;
+	@Autowired
+	private ClienteRepository clientes;
+	@Autowired
+	private ProductoRepository productos;
+
+	private Integer cantVentasPorDiaPermitido;
 
 	/**
 	 * Obtener todas las ventas
@@ -41,9 +52,29 @@ public class VentasService {
 	}
 
 	/**
-	 * Agregar una nueva venta
-	 * @param v venta
-	 * @return venta nueva
+	 * 
+	 * @param v
+	 * @return Ventas
+	 */
+	@Transactional
+	public Ventas addVenta(VentasJson v) {
+		Long cantVentas = clientes.getCantVentas(v.getCliente());
+		//Long cantVentas = clientes.getCantVentasPorDia(v.getCliente(), v.getFecha_venta());
+		Optional<Producto> po = productos.findById(v.getProducto());
+		Optional<Cliente> co = clientes.findById(v.getCliente());
+		if ((cantVentas < cantVentasPorDiaPermitido) && po.isPresent() && co.isPresent()){
+			Producto p = po.get();
+			Cliente c = co.get();
+			return this.ventas.save(new Ventas(p,c));
+		} else {
+			return null;
+		}
+	}
+
+	/**
+	 * 
+	 * @param v
+	 * @return Ventas
 	 */
 	@Transactional
 	public Ventas addVenta(Ventas v) {
