@@ -32,8 +32,6 @@ public class VentasService {
 	@Autowired
 	private ProductoRepository productos;
 
-	private Integer cantVentasPorDiaPermitido;
-
 	/**
 	 * Obtener todas las ventas
 	 * @return lista de ventas
@@ -52,9 +50,9 @@ public class VentasService {
 	}
 
 	/**
-	 * 
-	 * @param v
-	 * @return Ventas
+	 * Agregar una nueva venta si cumple con la condicion
+	 * @param v venta
+	 * @return objeto ventas
 	 */
 	@Transactional
 	public Ventas addVenta(VentasJson v) {
@@ -62,7 +60,8 @@ public class VentasService {
 		//Long cantVentas = clientes.getCantVentasPorDia(v.getCliente(), v.getFecha_venta());
 		Optional<Producto> po = productos.findById(v.getProducto());
 		Optional<Cliente> co = clientes.findById(v.getCliente());
-		if ((cantVentas < cantVentasPorDiaPermitido) && po.isPresent() && co.isPresent()){
+		Integer cantVentasPermitido = 3;
+		if ((cantVentas < cantVentasPermitido) && po.isPresent() && co.isPresent()){
 			Producto p = po.get();
 			Cliente c = co.get();
 			return this.ventas.save(new Ventas(p,c));
@@ -72,9 +71,9 @@ public class VentasService {
 	}
 
 	/**
-	 * 
-	 * @param v
-	 * @return Ventas
+	 * Agregar una nueva venta
+	 * @param v venta
+	 * @return objeto ventas
 	 */
 	@Transactional
 	public Ventas addVenta(Ventas v) {

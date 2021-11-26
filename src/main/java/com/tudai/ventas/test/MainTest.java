@@ -62,7 +62,7 @@ public class MainTest {
      */
     @Test
     public void limiteVenta() {
-        long documento = 1234567;
+        long documento = (long)(Math.random() * 999999);
         Cliente cliente = new Cliente(documento, "Andres", "Diaz Pace" );
         clienteController.addCliente(cliente);
         java.sql.Date hoy = new java.sql.Date(Calendar.getInstance().getTime().getTime());
