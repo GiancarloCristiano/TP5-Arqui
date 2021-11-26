@@ -85,7 +85,7 @@ public class VentasController {
 
 
 	/**
-	 * Agregar una nueva venta si este cliente tiene menos de 3
+	 * Agregar una nueva venta
 	 * @param v venta
 	 * @return entidad de respuesta con la venta y/o codigo de estado http
 	 */
@@ -99,11 +99,10 @@ public class VentasController {
 	})
 	@PostMapping(value="",consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<VentasJson> addVenta(@RequestBody VentasJson v){
-		
 		if (this.service.addVenta(v) != null) {
-			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
-		} else {
 			return new ResponseEntity<VentasJson>(v,HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_ACCEPTABLE);
 		}
 	}
 
@@ -122,7 +121,6 @@ public class VentasController {
 			@ApiResponse(code = 404, message = "No encontrado"),
 			@ApiResponse(code = 500, message = "Error interno del servidor")
 	})
-	
 	@PutMapping("/{serial}")
 	Ventas replaceVenta(@RequestBody Ventas newv,@PathVariable Long serial){
 		Optional<Ventas> v = service.findById(serial);
